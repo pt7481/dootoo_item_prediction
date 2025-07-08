@@ -14,6 +14,8 @@ scikit-learn = "*"
 pyarrow = "*"
 xgboost = "*"
 mlflow = "*"
+shap = "*"
+numpy = "==2.2"
 
 [dev-packages]
 ipykernel = "*"

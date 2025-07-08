@@ -4,6 +4,7 @@ repos:
     hooks:
       - id: nbqa-pylint
         additional_dependencies:
+          - shap
           - mlflow
           - xgboost
           - pylint
