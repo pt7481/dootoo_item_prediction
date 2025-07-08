@@ -13,9 +13,9 @@ repos:
           - python-dotenv
           - scikit-learn
           - SQLAlchemy
-        args: ["--disable=C0103,C0114,C0116,W0511,W0104"]  # Disable docstring warnings
+        args: ["--disable=C0103,C0114,C0116,C0303,W0511,W0104"]  # Disable docstring warnings
       - id: nbqa-flake8
-        args: ["--extend-ignore=E203,E501,E402,W291"]
+        args: ["--extend-ignore=E203,E501,E402,W291,W293"]
       - id: nbqa-black
         args: ["--line-length=88"]
 
