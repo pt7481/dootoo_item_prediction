@@ -9,6 +9,8 @@ dotenv = "*"
 psycopg2-binary = "*"
 sqlalchemy = "*"
 pandas = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 ipykernel = "*"
