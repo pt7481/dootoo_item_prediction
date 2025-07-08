@@ -4,18 +4,19 @@ repos:
     hooks:
       - id: nbqa-pylint
         additional_dependencies:
+          - mlflow
+          - xgboost
           - pylint
           - matplotlib
           - pandas
           - python-dotenv
           - scikit-learn
           - SQLAlchemy
-        args: ["--disable=C0114,C0116,W0511,W0104"]  # Disable docstring warnings
+        args: ["--disable=C0103,C0114,C0116,W0511,W0104"]  # Disable docstring warnings
       - id: nbqa-flake8
         args: ["--extend-ignore=E203,E501,E402,W291"]
       - id: nbqa-black
         args: ["--line-length=88"]
-      - id: nbqa-isort
 
   # - repo: https://github.com/kynan/nbstripout
   #   rev: 0.6.1
