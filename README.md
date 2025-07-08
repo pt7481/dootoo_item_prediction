@@ -1,3 +1,5 @@
+<img width=400 src="http://github.com/pt7481/dootoo_item_prediction/blob/main/mlops_zoomcamp_logo.jpg?raw=true"/>
+
 # DataTalks.club MLOps Zoomcamp Final Project: Task Completion Prediction
 
 * **Author:** Paul Tongyoo
