@@ -13,6 +13,7 @@ seaborn = "*"
 scikit-learn = "*"
 pyarrow = "*"
 xgboost = "*"
+mlflow = "*"
 
 [dev-packages]
 ipykernel = "*"
