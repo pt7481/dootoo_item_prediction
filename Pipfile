@@ -18,7 +18,6 @@ shap = "*"
 numpy = "==2.2"
 
 [dev-packages]
-ipykernel = "*"
 pre-commit = "*"
 nbqa = "*"
 pylint = "*"
@@ -26,6 +25,7 @@ black = "*"
 isort = "*"
 flake8 = "*"
 nbstripout = "*"
+ipykernel = "*"
 
 [requires]
-python_version = "3.10"
+python_version = "3.12"
