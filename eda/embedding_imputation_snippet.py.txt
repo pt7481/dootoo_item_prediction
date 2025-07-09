@@ -1,0 +1,63 @@
+# Impute any missing embeddings by decrypting text and calling SentenceTransformer
+kms_client = boto3.client('kms')
+def decrypt_and_embed(row):
+    """Decrypt base64 encoded text and return its embedding."""
+    encrypted_text = row['text']
+    if pd.isnull(encrypted_text):
+        return None
+    try:
+        
+        # Decrypt the base64 encoded text using KMS
+        response = kms_client.decrypt(
+            CiphertextBlob=base64.b64decode(encrypted_text.strip())
+        )
+        decoded_text = response['Plaintext'].decode('utf-8')
+
+        # Use SentenceTransformer to get the embedding
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        embedding = model.encode(decoded_text)
+
+        # Update database with the embedding
+        def update_embedding_in_db(item_id, embedding):
+            """Update the embedding in the database."""
+
+            load_dotenv()
+            db_host = os.getenv("DB_HOST")
+            db_port = os.getenv("DB_PORT")
+            db_name = os.getenv("DB_NAME")
+            db_user = os.getenv("DB_USER")
+            db_password = os.getenv("DB_PASSWORD")
+
+            db_url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+            engine = create_engine(db_url)
+
+            with engine.begin() as conn:
+                result = conn.execute(
+                    text("""
+                        UPDATE public."Item"
+                        SET embedding = :embedding
+                        WHERE id = :item_id
+                    """),
+                    {
+                        "embedding": embedding.tolist(),
+                        "item_id": item_id
+                    }
+                )
+                rows_updated = result.rowcount
+                if rows_updated == 0:
+                    print(f"No rows updated for item_id {item_id}. It may not exist in the database.")
+                elif rows_updated > 1:
+                    print(f"Warning: Multiple rows updated for item_id {item_id}. This should not happen.")
+                else:
+                    print(f"Updated embedding for item {item_id} in the database.")
+        update_embedding_in_db(row['id'], embedding)
+        
+
+        return embedding.tolist()  # Convert to list for DataFrame compatibility
+    except botocore.exceptions.ClientError as e:
+        print("AWS Error Code:", e.response['Error']['Code'])
+        print("AWS Error Message:", e.response['Error']['Message'])
+        print("Request ID:", e.response['ResponseMetadata'].get('RequestId'))
+        print("HTTP Status Code:", e.response['ResponseMetadata'].get('HTTPStatusCode'))
+        return None
+X["embedding"] = X[["id", "text","embedding"]].apply(lambda row: decrypt_and_embed(row) if pd.isnull(row.embedding) else row.embedding, axis=1)
