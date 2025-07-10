@@ -23,6 +23,7 @@ Explores the predictive value of task text semantic similarities to topic names 
 
 * Initial precision and recall scores (both scored >50% predicting training data) indicate creation time, hierarchy, and publicity *may* have some predictive value towards task completion (not drawing any inferences due to low sample size).
 * Ablation testing of topic similarity features showed may not be predictive of task completion given their inclusion reduced recall to below 20%.
+* SHAP analysis showed "day of the week" had the most predictive power relative to all other features.
 
 ### Next Steps
 
