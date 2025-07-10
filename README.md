@@ -16,7 +16,7 @@ Explores the predictive value of task text semantic similarities to topic names 
     * Topic Similarities (`similarity_Eating`, `similarity_Exercise`, etc).
 * Obtained task text similarities to topics using Hugging Face [Sentence Transformers all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) model Inference Provider API.
 * Protected user privacy by decrypting task text and never displaying task text in clear-text.
-* Trained XGBoost Classifier with engineered feature set to predict task completion.
+* Trained hyperparameter-tuned XGBoost Classifier with engineered feature set to predict task completion.
 * Evaluated model on Precision and Recall with closer focus on recall of minority completion task `is_done==0`.
 
 ### What I Learned
