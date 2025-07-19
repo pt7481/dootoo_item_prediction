@@ -23,10 +23,11 @@ Explores the predictive value of task text semantic similarities to topic names 
 
 * Initial precision and recall scores (both scored >50% predicting training data) indicate creation time, hierarchy, and publicity *may* have some predictive value towards task completion (not drawing any inferences due to low sample size).
 * Ablation testing of topic similarity features showed may not be predictive of task completion given their inclusion reduced recall to below 20%.
-* SHAP analysis revealed the following insights:
-  * "day of the week" had the most predictive power relative to all other features.
-  * Making a task public (`is_public==1`) increased its probability of completion.
-  * Making a task a subtask (`has_parent==1`) increased its probability of completion.
+* SHAP analysis revealed the following tentative insights:
+  * The day of the week the task was created had the most predictive power relative to all other features
+    * Creating a task earlier in the week (starting from Monday) increased its probability of completion.
+  * Making a task public increased its probability of completion.
+  * Making a task a subtask increased its probability of completion.
 
 ### Next Steps
 
